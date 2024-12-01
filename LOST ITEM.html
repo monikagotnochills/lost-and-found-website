@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find My Item - TraceIt</title>
+    <style>
+        /* Basic reset and styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1506765515384-028b60a970df'); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Logo styling */
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            height: 50px;
+        }
+
+        /* Form container styling with background and transparency */
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9); /* White background with transparency */
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            display: none; /* Initially hidden */
+        }
+
+        /* Form heading styling */
+        .form-heading {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            font-family: 'Arial Black', sans-serif;
+        }
+
+        /* Success message styling */
+        .success-message {
+            display: none;
+            font-size: 1.2em;
+            color: green;
+            margin-bottom: 15px;
+        }
+
+        /* Form group styling */
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        /* Submit button styling */
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #ffeb3b;
+            border: none;
+            border-radius: 50px;
+            color: #333;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1.1em;
+        }
+
+        .submit-btn:hover {
+            background-color: #ffd700;
+        }
+
+        /* Additional input styling for the 'Other' item */
+        #otherItemField {
+            display: none;
+        }
+
+        /* Find My Item button styling */
+        .find-btn {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            color: white;
+            background-color: #3498db;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            position: relative;
+            top: -150px;
+        }
+
+        .find-btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+    <script>
+        // JavaScript to handle form submission and dynamic field display
+        function handleFormSubmit(event) {
+            event.preventDefault(); // Prevent form from refreshing the page
+            document.querySelector('.success-message').style.display = 'block'; // Show success message
+        }
+
+        function handleItemChange(event) {
+            const otherField = document.getElementById('otherItemField');
+            otherField.style.display = event.target.value === 'other' ? 'block' : 'none';
+        }
+
+        function showForm() {
+            document.querySelector('.form-container').style.display = 'block';
+            document.querySelector('.find-btn').style.display = 'none'; // Hide the "Find My Item" button
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Logo at the top left -->
+    <img src="https://manavrachna.edu.in/assets/images/logo.png" alt="Manav Rachna Logo" class="logo">
+
+    <!-- Find My Item Button -->
+    <button class="find-btn" onclick="showForm()">Find My Item</button>
+
+    <div class="form-container">
+        <!-- Success message -->
+        <div class="success-message">Thank you! Your response has been submitted.</div>
+        
+        <!-- Topic heading -->
+        <div class="form-heading">LOST ITEM</div>
+        
+        <form onsubmit="handleFormSubmit(event)">
+            <!-- Name Field -->
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <!-- Class Field -->
+            <div class="form-group">
+                <label for="class">Class</label>
+                <input type="text" id="class" name="class" required>
+            </div>
+
+            <!-- Course Field -->
+            <div class="form-group">
+                <label for="course">Course</label>
+                <input type="text" id="course" name="course" required>
+            </div>
+
+            <!-- Section Field -->
+            <div class="form-group">
+                <label for="section">Section</label>
+                <input type="text" id="section" name="section" required>
+            </div>
+
+            <!-- Roll Number Field -->
+            <div class="form-group">
+                <label for="rollNumber">Roll Number</label>
+                <input type="text" id="rollNumber" name="rollNumber" required>
+            </div>
+
+            <!-- Number of Receiver Field -->
+            <div class="form-group">
+                <label for="receiverNumber">Number of Receiver</label>
+                <input type="tel" id="receiverNumber" name="receiverNumber" required>
+            </div>
+
+            <!-- Item Name Dropdown Field with 'Other' option -->
+            <div class="form-group">
+                <label for="itemName">Item Name</label>
+                <select id="itemName" name="itemName" required onchange="handleItemChange(event)">
+                    <option value="money">Money</option>
+                    <option value="wallet">Wallet</option>
+                    <option value="book">Book</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <!-- Additional Textbox for "Other" Item -->
+            <div class="form-group" id="otherItemField">
+                <label for="otherItem">Please specify the item</label>
+                <input type="text" id="otherItem" name="otherItem">
+            </div>
+
+            <!-- Date of Item Lost Text Field -->
+            <div class="form-group">
+                <label for="dateLost">Date of Item Lost</label>
+                <input type="date" id="dateLost" name="dateLost" required>
+            </div>
+
+            <!-- Time When Found Field -->
+            <div class="form-group">
+                <label for="foundTime">Time When Found</label>
+                <input type="time" id="foundTime" name="foundTime" required>
+            </div>
+
+            <!-- Place Where Item Found Field -->
+            <div class="form-group">
+                <label for="foundPlace">Place Where Item Found</label>
+                <input type="text" id="foundPlace" name="foundPlace" required>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
+
+</body>
+</html>
